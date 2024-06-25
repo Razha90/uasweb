@@ -1,0 +1,12 @@
+{
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    },
+    "scripts": {
+        "serve": "php -S localhost:8000 -t public",
+        "migrate": "php .\\database\\migrate.php",
+        "back": "php .\\database\\backMigrate.php"
+
+
+    }
+}
