@@ -42,7 +42,6 @@ class UserController
     $login = $user->login($username, $password);
 
     if ($login !== null) {
-      file_put_contents(__DIR__ . '/../logs/app.log', "dua", FILE_APPEND);
 
       $logger->success("User $username has been logged in");
       $_SESSION['display_name'] = $login['display_name'];

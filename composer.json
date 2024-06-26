@@ -8,5 +8,8 @@
         "back": "php .\\database\\backMigrate.php"
 
 
+    },
+    "config": {
+        "process-timeout": 0
     }
 }

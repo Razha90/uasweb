@@ -18,6 +18,7 @@ final class bookController
     $totalBooks = count($allBooks);
 
     $books = array_slice($allBooks, $offset, $limit);
+    
 
     if (!empty($books)) {
         $totalPages = ceil($totalBooks / $limit);
@@ -47,9 +48,8 @@ final class bookController
   public function addBooks()
   {
     $book = new Book();
-    $logs = new Logger(); // Ensure path is correct and writable
+    $logs = new Logger();
 
-    // Set Content-Type ke application/json
     header('Content-Type: application/json');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -87,7 +87,6 @@ final class bookController
 
       if ($success) {
         $logs->success('Book added successfully');
-        // Mengirimkan respons JSON
         echo json_encode([
           'status' => 'success',
           'message' => 'Data buku berhasil disimpan.',
@@ -117,16 +116,77 @@ final class bookController
     }
   }
 
-  public function deleteBook()
+  public function getBookById($id)
+  {
+    $book = new Book();
+    header('Content-Type: application/json');
+
+    $bookData = $book->getBookById($id);
+
+    if ($bookData) {
+      echo json_encode([
+        'status' => 'success',
+        'data' => $bookData
+      ]);
+    } else {
+      echo json_encode([
+        'status' => 'error',
+        'message' => 'Data buku tidak ditemukan.'
+      ]);
+    }
+  }
+
+  public function bookDelete() {
+    $book = new Book();
+    $logs = new Logger();
+    $id = $_POST['id'] ?? '';
+    file_put_contents(__DIR__ . '/../logs/app.log', $_POST['id'], FILE_APPEND);
+
+    if ($id === '') {
+      $logs->warning('Invalid request');
+      header("Location: {$_SERVER['HTTP_REFERER']}");
+      return;
+    }
+
+    if ($_SESSION['role'] == 'admin') {
+      if (empty($id)) {
+        $logs->warning('Invalid request');
+      header("Location: {$_SERVER['HTTP_REFERER']}");
+        return;
+      }
+
+      $success = $book->deleteBook($id);
+
+      if ($success) {
+        $logs->success('Book deleted successfully');
+        header("Location: /");
+      } else {
+        $logs->error('Failed to delete book');
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+
+      }
+    } else {
+      $logs->warning('User Delete Not Admin');
+      header("Location: {$_SERVER['HTTP_REFERER']}");
+    }
+  }
+
+  public function bookUpdate()
   {
     $book = new Book();
     $logs = new Logger();
-    // Set Content-Type ke application/json
+
     header('Content-Type: application/json');
 
-    if ($_SESSION['role'] == 'admin') {
-      $id = $_POST['id'] ?? '';
-      if (empty($id)) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $title = $_POST['title'] ?? 'Razha';
+      $author = $_POST['author'] ?? 'Unknown';
+      $synopsis = $_POST['synopsis'] ?? 'No synopsis';
+      $published_year = $_POST['published_year'] ?? 0;
+      $isImage = false;
+      $id = $_POST['id'] ?? null;
+
+      if ($id === null) {
         $logs->warning('Invalid request');
         echo json_encode([
           'status' => 'error',
@@ -135,26 +195,49 @@ final class bookController
         return;
       }
 
-      $success = $book->deleteBook($id);
+      $targetDir = __DIR__ . '/../public/img/';
+      if (!file_exists($targetDir)) {
+        mkdir($targetDir, 0777, true);
+      }
+
+      $image_url = '';
+      if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+        $imageFileType = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        $targetFile = $targetDir . bin2hex(random_bytes(12)) . '.' . $imageFileType;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+          $image_url = basename($targetFile);
+          $isImage = true;
+        } else {
+          $isImage = false;
+        }
+      }
+
+      if ($isImage) {
+        $success = $book->updateBook($id, $title, $author, $synopsis, $published_year, $image_url);
+      } else {
+      $success = $book->updateBook($id, $title, $author, $synopsis, $published_year);
+      }
 
       if ($success) {
-        $logs->success('Book deleted successfully');
+        $logs->success('Book added successfully');
         echo json_encode([
           'status' => 'success',
-          'message' => 'Data buku berhasil dihapus.'
+          'message' => 'Data buku berhasil disimpan.'
         ]);
       } else {
-        $logs->error('Failed to delete book');
+        $logs->error('Failed to add book');
+        // Mengirimkan respons JSON untuk kesalahan
         echo json_encode([
           'status' => 'error',
-          'message' => 'Gagal menghapus data buku.'
+          'message' => 'Gagal menyimpan data buku.'
         ]);
       }
     } else {
-      $logs->warning('User Delete Not Admin');
+      $logs->warning('Invalid request method');
+      // Mengirimkan respons JSON untuk metode request tidak valid
       echo json_encode([
         'status' => 'error',
-        'message' => 'Metode request tidak kamu bukan admin.'
+        'message' => 'Metode request tidak valid.'
       ]);
     }
   }

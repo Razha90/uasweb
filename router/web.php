@@ -13,6 +13,7 @@ $router->map('GET', '/', function() {
 });
 
 $router->map('GET', '/register', function() {
+    authMiddleware();
     require __DIR__ . '/../views/register.php';
 });
 $router->map('POST', '/register', [$userController, 'register']);
@@ -29,12 +30,20 @@ $router->map('GET', '/logout', function () use ($userController){
 });
 
 
+$router->map('GET', '/add-book', function() {
+    require __DIR__ . '/../views/addBook.php';
+});
+
 $router->map('GET', '/404', function() {
     require __DIR__ . '/../views/404.php';
 });
 
 $router->map('GET', '/phpinfo', function() {
     require __DIR__ . '/../views/phpInfo.php';
+});
+
+$router->map('GET', '/book-detail', function() {
+    require __DIR__ . '/../views/bookDetail.php';
 });
 
 // $router->map('GET', '/user/[i:id]', function($id) {

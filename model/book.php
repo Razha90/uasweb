@@ -91,4 +91,54 @@ class Book
             return false;
         }
     }
+
+    public function getBookById(string $id): array
+    {
+        try {
+            $sql = "SELECT * FROM books WHERE id = :id";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':id', $id, SQLITE3_TEXT);
+            $result = $stmt->execute();
+            $book = $result->fetchArray(SQLITE3_ASSOC);
+
+            return $book ? $book : [];
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return [];
+        }
+    }
+
+    public function updateBook(string $id, string $title, string $author, string $synopsis, int $published_year, ?string $image_url = null): bool
+    {
+        try {
+            if ($image_url === null) {
+                $sql = "UPDATE books SET title = :title, author = :author, synopsis = :synopsis, published_year = :published_year WHERE id = :id";
+                $stmt = $this->con->prepare($sql);
+                $stmt->bindParam(':title', $title, SQLITE3_TEXT);
+                $stmt->bindParam(':author', $author, SQLITE3_TEXT);
+                $stmt->bindParam(':synopsis', $synopsis, SQLITE3_TEXT);
+                $stmt->bindParam(':published_year', $published_year, SQLITE3_INTEGER);
+                $stmt->bindParam(':id', $id, SQLITE3_TEXT);
+                $stmt->execute();
+
+                return true;
+            } else {
+                $sql = "UPDATE books SET title = :title, author = :author, synopsis = :synopsis, image_url = :image_url, published_year = :published_year WHERE id = :id";
+                $stmt = $this->con->prepare($sql);
+                $stmt->bindParam(':title', $title, SQLITE3_TEXT);
+                $stmt->bindParam(':author', $author, SQLITE3_TEXT);
+                $stmt->bindParam(':synopsis', $synopsis, SQLITE3_TEXT);
+                $stmt->bindParam(':image_url', $image_url, SQLITE3_TEXT);
+                $stmt->bindParam(':published_year', $published_year, SQLITE3_INTEGER);
+                $stmt->bindParam(':id', $id, SQLITE3_TEXT);
+                $stmt->execute();
+
+                return true;
+            }
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return false;
+        }
+    }
+
 }

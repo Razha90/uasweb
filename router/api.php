@@ -8,9 +8,14 @@ $userController = new userController();
 
 $router->map('GET', '/api/books', [$bookController, 'getBooks']);
 
+$router->map('GET', '/api/book/[:id]', [$bookController, 'getBookById']);
+
 $router->map('POST', '/api/book', [$bookController, 'addBooks']);
 
-$router->map('POST', '/api/delete', [$userController, 'deleteBook']);
+$router->map('POST', '/api/book-delete', [$bookController, 'bookDelete']);
+
+$router->map('POST', '/api/book-update', [$bookController, 'bookUpdate']);
+
 
 $router->map('GET', '/api/posts', function() {
     // Logika untuk mengambil data post dari API
