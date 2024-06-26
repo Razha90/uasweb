@@ -5,8 +5,8 @@
     "scripts": {
         "serve": "php -S localhost:8000 -t public",
         "migrate": "php .\\database\\migrate.php",
-        "back": "php .\\database\\backMigrate.php"
-
+        "back": "php .\\database\\backMigrate.php",
+        "tailwind": "npx tailwindcss -i styles.css -o ./public/css/app.css"
 
     },
     "config": {
