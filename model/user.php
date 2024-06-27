@@ -50,7 +50,8 @@ class User
             if (password_verify($password, $user['password'])) {
                 return [
                     'display_name' => $user['display_name'],
-                    'role' => $user['role']
+                    'role' => $user['role'],
+                    'id' => $user['id']
                 ];
             }
             return null;

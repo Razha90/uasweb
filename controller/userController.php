@@ -47,6 +47,8 @@ class UserController
       $_SESSION['display_name'] = $login['display_name'];
       $_SESSION['role'] = $login['role'];
       $_SESSION['username'] = $username;
+      file_put_contents(__DIR__ . '/../logs/app.log', sprintf("[%s][%s] %s\n", date('Y-m-d H:i:s'), '[ERROR]', $login['id']), FILE_APPEND);
+      $_SESSION['id'] = $login['id'];
       header("Location: /");
       exit();
     } else {

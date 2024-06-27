@@ -4,9 +4,11 @@ if (isset($_SESSION['display_name'])) {
   $display_name = $_SESSION['display_name'];
   $username = $_SESSION['username'];
   $role = $_SESSION['role'] == 'admin';
+  $userId = $_SESSION['id'];
 } else {
   $logged_in = false;
   $role = false;
+  $userId = '';
 }
 
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
@@ -75,7 +77,7 @@ $fullUrl = "$protocol://$host$uri";
 
         </div>
         <?php if ($logged_in) : ?>
-          <div id="nav-button" class="flex flex-row justify-center items-center gap-3 bg-indigo-500 rounded-xl py-3 px-6 cursor-pointer">
+          <div id="nav-button" @click="toggleDropdown" class="flex flex-row justify-center items-center gap-3 bg-indigo-500 rounded-xl py-3 px-6 cursor-pointer">
             <p class="text-2xl text-white font-bold">Selamat Datang, <span class="italic"><?= $display_name ?></span></p>
             <div class="relative flex justify-center items-center">
               <button id="dropdownButton" class="focus:outline-none bg-indigo-800 rounded-xl p-2">
@@ -83,8 +85,8 @@ $fullUrl = "$protocol://$host$uri";
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
                 </svg>
               </button>
-              <div id="dropdownMenu" class="hidden absolute right-0 top-8 mt-2 w-48 bg-white rounded-md drop-shadow-lg py-2 z-50">
-                <a href="/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Keluar</a>
+              <div id="dropdownMenu" :class="{ hidden: isDropdownHidden }" class="absolute right-0 top-8 mt-2 w-48 bg-white rounded-md drop-shadow-lg py-2 z-50">
+              <a href="/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Keluar</a>
               </div>
             </div>
           </div>
@@ -117,17 +119,28 @@ $fullUrl = "$protocol://$host$uri";
 
           <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{searchs.synopsis}}</p>
         </div>
-        <?php if ($logged_in) : ?>
-          <div class="flex justify-center items-center flex-row">
-            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click="pinjamBuku">Pinjam</button>
-            <button @click="updateIsUpdate" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Perbaharui</button>
-            <button @click="deleteBook()" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Hapus</button>
-          </div>
-        <?php endif; ?>
+        <div class="flex justify-center items-center flex-row">
+          <button v-if="isBookLoan" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click="addBookLoan">Pinjam</button>
+          <button v-else @click="deleteBookLoan" type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Kembalikan</button>
+          <?php if ($logged_in) : ?>
+            <?php if ($role) : ?>
+              <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800" @click="deleteBook">Hapus</button>
+              <button type="button" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800" @click="updateIsUpdate">Perbaharui</button>
+            <?php endif; ?>
+          <?php endif; ?>
+        </div>
+
       </div>
     </main>
     <form id="delete-book" action="/api/book-delete" method="post" class="hidden">
       <input type="text" name="id" :value="searchs.id">
+    </form>
+    <form class="hidden" id="formAddBookLoan" action="/api/book-loan" method="post">
+      <input type="text" name="book_id" :value="searchs.id">
+      <input type="text" name="user_id" value="<?= $userId ?>">
+    </form>
+    <form action="/api/delete-book-loan" method="post" id="delete-book-loan" class="hidden">
+      <input type="text" name="id" v-model="dataBookLoan.id">
     </form>
     <div v-if="isUpdate" class="fixed inset-0 bg-white bg-opacity-50 backdrop-blur-sm z-10"></div>
     <div v-if="isUpdate" class="min-w-[350px] w-[500px] z-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl drop-shadow-lg p-4">
@@ -165,48 +178,31 @@ $fullUrl = "$protocol://$host$uri";
           <button @click="formUpdate" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Perbaharui Buku</button>
         </div>
       </form>
+
     </div>
 
   </div>
 
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let navButton = document.getElementById('nav-button');
-      var dropdownButton = document.getElementById('dropdownButton');
-      var dropdownMenu = document.getElementById('dropdownMenu');
-
-      navButton.addEventListener('click', function() {
-        dropdownMenu.classList.toggle('hidden');
-      });
-
-      window.addEventListener('click', function(event) {
-        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-          dropdownMenu.classList.add('hidden');
-        }
-      });
-
-      let addBook = document.getElementById('add-book');
-      addBook.addEventListener('click', function() {
-        window.location.href = '/add-book';
-      });
-    });
-</script>
-<script>
   const {
     createApp,
     ref,
-    reactive
+    reactive,
+    onMounted,
+    onBeforeUnmount
   } = Vue
 
   createApp({
     setup() {
       const searchs = ref([]);
       const dataUpdate = ref([]);
+      const isBookLoan = ref(true);
       const isImage = ref(false);
       const isUpdate = ref(false);
       const isAlertSuccess = ref('');
-      const isAlertError =ref('');
+      const isAlertError = ref('');
+      const dataBookLoan = ref({});
       async function searchBook(id) {
         fetch(`/api/book/${id}`, {
             method: 'GET',
@@ -233,31 +229,53 @@ $fullUrl = "$protocol://$host$uri";
       const currentUrl = window.location.href;
       const urls = new URL(currentUrl);
       const detailValue = urls.searchParams.get('detail');
-      searchBook(detailValue);
+
+      function activeLoad() {
+        searchBook(detailValue);
+        <?php if ($logged_in) : ?>
+          getBookLoan();
+        <?php endif; ?>
+      }
+      activeLoad();
 
       function backButton() {
-        const currentDomain = window.location.hostname; // Mendapatkan domain saat ini
+        const currentDomain = window.location.hostname;
+        const currentPort = window.location.port;
+        const currentUrl = window.location.href;
         const referrer = document.referrer;
+        // const previousPage = sessionStorage.getItem('previousPage');
+        window.location.href = window.location.protocol + "//" + currentDomain + (currentPort ? ":" + currentPort : ""); // Kembali ke halaman utama
 
-        if (referrer) {
-          // Cek apakah referrer dari domain yang sama
-          const referrerDomain = (new URL(referrer)).hostname;
-          if (referrerDomain === currentDomain) {
-            window.history.back();
-          } else {
-            window.location.href = window.location.protocol + "//" + currentDomain; // Kembali ke halaman utama
-          }
-        } else {
-          // Jika tidak ada history atau referrer
-          window.location.href = window.location.protocol + "//" + currentDomain; // Kembali ke halaman utama
-        }
+        // if (referrer) {
+        //   // Cek apakah referrer dari domain yang sama dengan port yang sama
+        //   const referrerUrl = new URL(referrer);
+        //   const referrerDomain = referrerUrl.hostname;
+        //   const referrerPort = referrerUrl.port;
+
+        //   if (referrerDomain === currentDomain && referrerPort === currentPort && referrer !== previousPage) {
+        //     sessionStorage.setItem('previousPage', currentUrl); // Simpan halaman saat ini
+        //     window.history.back();
+        //   } else {
+        //     sessionStorage.setItem('previousPage', currentUrl); // Simpan halaman saat ini
+        //     window.location.href = window.location.protocol + "//" + currentDomain + (currentPort ? ":" + currentPort : ""); // Kembali ke halaman utama
+        //   }
+        // } else {
+        //   // Jika tidak ada history atau referrer
+        //   sessionStorage.setItem('previousPage', currentUrl); // Simpan halaman saat ini
+        //   window.location.href = window.location.protocol + "//" + currentDomain + (currentPort ? ":" + currentPort : ""); // Kembali ke halaman utama
+        // }
       }
+
+
 
 
       function deleteBook() {
-        const form = document.getElementById('delete-book');
-        form.submit();
-      }
+  const form = document.getElementById('delete-book');
+  if (confirm('Anda yakin ingin menghapus buku ini?')) {
+    form.submit();
+  }
+}
+
 
       function updateIsUpdate() {
         isUpdate.value = !isUpdate.value;
@@ -297,15 +315,82 @@ $fullUrl = "$protocol://$host$uri";
           isAlertSuccess.value = '';
           isAlertError.value = '';
         }, 3000);
-        }
+      }
 
-        function pinjamBuku() {
-          alert('Maaf Layanan Pinjam Buku Belum Tersedia!');
-        }
+      function getBookLoan() {
+        fetch(`/api/book-loan/<?= $userId ?>`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              const filter = data.data.find(item => item.book_id == searchs.value.id)
+              console.log(data.data);
+              console.log(filter);
+              if (filter) {
+                dataBookLoan.value = filter;
+                isBookLoan.value = false;
+                showAlert(true);
+              } else {
+                dataBookLoan.value = [];
+                isBookLoan.value = true;
+                showAlert(false);
+              }
 
-        function navbarButton() {
-          
+            } else {
+              showAlert(false);
+              isBookLoan.value = true;
+              dataBookLoan.value = [];
+            }
+          });
+      }
+
+      function addBookLoan() {
+        <?php if ($logged_in) : ?>
+          const form = document.getElementById('formAddBookLoan');
+          form.submit();
+        <?php else : ?>
+          window.location.href = '/login';
+        <?php endif; ?>
+
+      }
+
+      const goToAddBook = () => {
+        window.location.href = '/add-book'
+      }
+
+      function deleteBookLoan() {
+        const form = document.getElementById('delete-book-loan');
+        form.submit();
+      }
+
+      const handleClickOutside = (event) => {
+        const dropdownButton = document.getElementById('nav-button')
+        const dropdownMenu = document.getElementById('dropdownMenu')
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          isDropdownHidden.value = true
         }
+      }
+
+      const isDropdownHidden = ref(true)
+
+      const toggleDropdown = () => {
+        isDropdownHidden.value = !isDropdownHidden.value
+      }
+
+      onMounted(() => {
+        window.addEventListener('click', handleClickOutside)
+
+      })
+
+      onBeforeUnmount(() => {
+        window.removeEventListener('click', handleClickOutside)
+
+      })
+
       return {
         searchs,
         isImage,
@@ -317,7 +402,13 @@ $fullUrl = "$protocol://$host$uri";
         formUpdate,
         isAlertSuccess,
         isAlertError,
-        pinjamBuku
+        addBookLoan,
+        isDropdownHidden,
+        toggleDropdown,
+        goToAddBook,
+        dataBookLoan,
+        isBookLoan,
+        deleteBookLoan
       }
     }
   }).mount('#app')
