@@ -25,6 +25,8 @@ $fullUrl = "$protocol://$host$uri";
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perpustakaan Online</title>
   <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/chatting.css">
+
   <link rel="icon" href="/img/Icon-Perpustakaan.png" type="image/png">
   <script src="/js/vue.global.js"></script>
 
@@ -109,55 +111,57 @@ $fullUrl = "$protocol://$host$uri";
     </header>
     <main class="w-full h-canvas mt-10 flex justify-center">
       <div
-        class="w-11/12 h-full flex flex-col items-center bg-white border-gray-200 rounded-lg shadow-2xl p-5 gap-3">
+        class="w-11/12 h-full flex flex-col overflow-y-auto items-center bg-white border-gray-200 rounded-lg shadow-2xl p-5 gap-3">
         <div>
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{{searchs.title}}</h5>
         </div>
         <img v-if="isImage"
-          class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+          class="object-cover w-full rounded-t-lg max-h-[500px] md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
           :src="'/img/'+searchs.image_url" :alt="searchs.title">
-        <img v-else class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="/img/question-mark.png" :alt="searchs.title">
+        <!-- <img v-else class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+          src="/img/question-mark.png" :alt="searchs.title"> -->
         <div class="flex flex-col justify-between items-start leading-normal">
-          <div class="flex flex-row justify-start items-center gap-1 mb-2">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd"
-                d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
-                clip-rule="evenodd" />
-            </svg>
-            <p class="font-normal text-gray-700 dark:text-white">{{searchs.author}}</p>
-          </div>
+          <div class="flex justify-center items-center w-full gap-4">
+            <div class="flex flex-row justify-center items-center gap-1">
+              <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                  d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
+                  clip-rule="evenodd" />
+              </svg>
+              <p class="font-normal text-gray-700 ">{{searchs.author}}</p>
+            </div>
 
-          <div class="flex flex-row justify-start items-center gap-1 mb-2">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-              width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd"
-                d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
-                clip-rule="evenodd" />
-            </svg>
-            <p class="font-normal text-gray-700 dark:text-white">{{searchs.published_year}}</p>
+            <div class="flex flex-row justify-start items-center gap-1">
+              <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                  d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+                  clip-rule="evenodd" />
+              </svg>
+              <p class="font-normal text-gray-700 ">{{searchs.published_year}}</p>
+            </div>
           </div>
-
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{searchs.synopsis}}</p>
+          <div class="myArticle" v-html="searchs.synopsis"></div>
+          <!-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{searchs.synopsis}}</p> -->
         </div>
         <!-- <div class="flex justify-center items-center flex-row">
           <button v-if="isBookLoan" type="button"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             @click="addBookLoan">Pinjam</button>
           <button v-else @click="deleteBookLoan" type="button"
-            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Kembalikan</button>
-          <?php if ($logged_in): ?>
-            <?php if ($role): ?>
-              <button type="button"
-                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
-                @click="deleteBook">Hapus</button>
-              <button type="button"
-                class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"
-                @click="updateIsUpdate">Perbaharui</button>
-            <?php endif; ?>
-          <?php endif; ?>
+            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Kembalikan</button> </d
         </div> -->
+        <?php if ($logged_in): ?>
+          <?php if ($role): ?>
+            <button type="button"
+              class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+              @click="deleteBook">Hapus</button>
+            <button type="button"
+              class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"
+              @click="updateIsUpdate">Perbaharui</button>
+          <?php endif; ?>
+        <?php endif; ?>
 
       </div>
     </main>

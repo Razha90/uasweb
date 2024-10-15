@@ -23,3 +23,64 @@ aeb509c48fb3c00fc47ab93b[2024-06-27 11:12:06][SUCCESS] Book deleted successfully
 [2024-10-15 10:09:17][[ERROR]] be14e99d53647e5dccb11c6f
 [2024-10-15 10:51:06][SUCCESS] User razha90 has been logged in
 [2024-10-15 10:51:06][[ERROR]] be14e99d53647e5dccb11c6f
+[2024-10-15 15:52:08][SUCCESS] User razha90 has been logged in
+[2024-10-15 15:52:08][[ERROR]] be14e99d53647e5dccb11c6f
+[2024-10-15 16:29:03][ERROR] Title: Matematika, Author: Robet Kyosaki, Synopsis:     <article>
+        <p>Matematika adalah fondasi dari berbagai ilmu pengetahuan dan memiliki peran penting dalam kehidupan sehari-hari.</p>
+
+        <h2>Apa Itu Matematika?</h2>
+        <p>Matematika adalah ilmu yang mempelajari angka, ruang, struktur, dan perubahan. Dari penghitungan sederhana hingga teori kompleks, matematika membantu kita memahami dunia di sekitar kita.</p>
+
+        <h2>Jenis Operasi Matematika</h2>
+        <ul>
+            <li><strong>Penjumlahan</strong> - Menambahkan dua atau lebih angka.</li>
+            <li><strong>Pengurangan</strong> - Mengurangi satu angka dari angka lainnya.</li>
+            <li><strong>Perkalian</strong> - Mengalikan dua angka atau lebih.</li>
+            <li><strong>Pembagian</strong> - Membagi satu angka dengan angka lainnya.</li>
+        </ul>
+
+        <h2>Contoh Penerapan Matematika</h2>
+        <p>Matematika digunakan dalam kehidupan sehari-hari seperti menghitung jarak, kecepatan, dan waktu, serta dalam aktivitas sehari-hari seperti berbelanja.</p>
+
+        <figure>
+            <img src="dummy-image.jpg" alt="Ilustrasi Matematika" />
+            <figcaption>Gambar 1: Ilustrasi penggunaan matematika dalam kehidupan.</figcaption>
+        </figure>
+
+        <h2>Kesimpulan</h2>
+        <p>Memahami matematika dasar sangat penting untuk membantu kita dalam banyak aspek kehidupan, dari pekerjaan hingga kehidupan sehari-hari.</p>
+    </article>
+
+    <article>
+        <p>Matematika juga penting dalam sains dan teknologi. Dalam bidang fisika, matematika digunakan untuk memahami gerak benda dan energi. Dalam biologi, matematika digunakan untuk memodelkan pertumbuhan populasi dan aliran darah.</p>
+
+        <h2>Peran Matematika dalam Teknologi</h2>
+        <p>Dengan kemajuan teknologi, matematika menjadi lebih penting dalam pengembangan perangkat lunak, enkripsi data, dan kecerdasan buatan (AI).</p>
+
+        <h2>Matematika dan Statistik</h2>
+        <p>Statistik adalah cabang matematika yang digunakan untuk menganalisis data. Statistik penting dalam banyak bidang seperti ekonomi, kesehatan, dan penelitian ilmiah.</p>
+
+        <ul>
+            <li><strong>Analisis Data</strong> - Statistik membantu mengumpulkan dan menganalisis data untuk menemukan tren dan pola.</li>
+            <li><strong>Prediksi</strong> - Dengan statistik, kita bisa membuat prediksi berdasarkan data historis.</li>
+        </ul>
+
+        <figure>
+            <img src="dummy-image2.jpg" alt="Grafik Matematika" />
+            <figcaption>Gambar 2: Contoh penggunaan statistik dalam analisis data.</figcaption>
+        </figure>
+
+        <h2>Matematika dan Keuangan</h2>
+        <p>Dalam bidang keuangan, matematika digunakan untuk menghitung bunga, investasi, dan risiko. Memahami konsep keuangan dasar seperti persentase dan perhitungan bunga sangat penting dalam kehidupan sehari-hari.</p>
+    </article>
+
+, Published Year: 2004, Image URL: 91fa3c262147725096a87a28.jpeg
+[2024-10-15 16:29:03][SUCCESS] Book added successfully
+[2024-10-15 17:23:30][SUCCESS] File migrasi create_book_loans_table.php berhasil dijalankan.
+[2024-10-15 17:23:30][SUCCESS] File migrasi create_book_table.php berhasil dijalankan.
+[2024-10-15 17:23:30][SUCCESS] File migrasi create_user_table.php berhasil dijalankan.
+[2024-10-15 17:23:30][SUCCESS] Semua file migrasi berhasil dijalankan.
+[2024-10-15 17:55:44][ERROR] Failed to login user razha90
+[2024-10-15 17:55:58][SUCCESS] User razha90 has been registered
+[2024-10-15 17:56:07][SUCCESS] User razha90 has been logged in
+[2024-10-15 17:56:07][[ERROR]] cd39c374b22fe783c02677a5

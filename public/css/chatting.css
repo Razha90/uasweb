@@ -84,3 +84,183 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.chat-body {
+  max-height: 300px; /* Mengatur tinggi maksimal jendela chat */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column; /* Membuat scroll ketika isi chat lebih banyak dari tinggi maksimal */
+}
+
+.chat-bubble {
+  max-width: 70%; /* Membatasi lebar bubble */
+  padding: 10px; /* Jarak dalam bubble */
+  margin: 5px 0; /* Jarak antar bubble */
+  border-radius: 10px; /* Sudut melengkung */
+  position: relative; /* Untuk mengatur posisi */
+}
+
+.sender {
+  background-color: #d1e7dd; /* Warna background untuk pesan yang dikirim */
+  align-self: flex-end; /* Posisi di sebelah kanan */
+}
+
+.receiver {
+  background-color: #f8d7da; /* Warna background untuk pesan yang diterima */
+  align-self: flex-start; /* Posisi di sebelah kiri */
+}
+
+
+/* General article styling */
+.myArticle {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Headings */
+.myArticle h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Paragraphs */
+.myArticle p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* Lists */
+.myArticle ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+.myArticle ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* Ordered Lists */
+.myArticle ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+.myArticle ol li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* Images */
+.myArticle img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Image captions */
+.myArticle figcaption {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Figures (to style both images and videos in figure tags) */
+.myArticle figure {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Videos */
+.myArticle video {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+/* Blockquote */
+.myArticle blockquote {
+  font-size: 18px;
+  color: #666;
+  margin: 20px 0;
+  padding-left: 20px;
+  border-left: 4px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Code blocks */
+.myArticle pre {
+  background-color: #2e2e2e;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+.myArticle code {
+  font-family: 'Courier New', monospace;
+  background-color: #f1f1f1;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Tables */
+.myArticle table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.myArticle table th, .myArticle table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.myArticle table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.myArticle table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .myArticle {
+      padding: 10px;
+  }
+  
+  .myArticle h2 {
+      font-size: 20px;
+  }
+  
+  .myArticle p, .myArticle ul li, .myArticle ol li {
+      font-size: 14px;
+  }
+  
+  .myArticle video, .myArticle img {
+      max-width: 100%;
+  }
+}

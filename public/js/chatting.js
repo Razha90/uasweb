@@ -12,3 +12,13 @@ floatingButton.addEventListener('click', () => {
 closeChatButton.addEventListener('click', () => {
     chatWindow.classList.add('hidden');
 });
+
+const socket = new WebSocket('ws://localhost:8082');
+
+socket.onopen = function() {
+    console.log('Connected to WebSocket server');
+};
+
+socket.onmessage = function(event) {
+    console.log(event.data);// Scroll ke bawah
+};
