@@ -21,12 +21,16 @@ $fullUrl = "$protocol://$host$uri";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Online</title>
+  <title>Belajar Online</title>
   <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/chatting.css">
+
   <link rel="icon" href="/img/Icon-Perpustakaan.png" type="image/png">
+  
 </head>
 <script src="/js/vue.global.js"></script>
 <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+
 <style>
   .hidden {
     display: none;
@@ -80,7 +84,7 @@ $fullUrl = "$protocol://$host$uri";
     </div>
     <header class="w-full">
       <div class="w-full h-20 py-4 flex justify-center items-center border-b-2 border-b-gray-900">
-        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PERPUSTAKAAN ONLINE</h1>
+        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PEMBELAJARAN ONLINE</h1>
       </div>
       <div class="w-full flex justify-end items-center bg-sky-950 p-5">
         <nav>
@@ -145,7 +149,7 @@ $fullUrl = "$protocol://$host$uri";
               </a>
               <p class="w-[258px] line-clamp-3 mb-3 font-normal text-gray-700 dark:text-gray-400">{{ search.synopsis }}</p>
               <a :href="'/book-detail?detail=' + search.id" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Lihat Buku
+                Materi Pembelajaran
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                 </svg>
@@ -169,6 +173,27 @@ $fullUrl = "$protocol://$host$uri";
     </div>
   </div>
   </div>
+
+  <div id="floating-button" class="floating-button ">
+        <img src="/img/messenger.png" alt="Chat" />
+    </div>
+
+    <!-- Jendela Chat -->
+    <div id="chat-window" class="chat-window hidden">
+        <div class="chat-header">
+            <h3>Mental Care</h3>
+            <button id="close-chat" class="close-btn">X</button>
+        </div>
+        <div class="chat-body">
+            <p>Selamat datang di dukungan chat kami!</p>
+            <!-- Tambahkan elemen chat di sini -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" placeholder="Type your message..." />
+            <button>Send</button>
+        </div>
+    </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       let navButton = document.getElementById('nav-button');
@@ -191,6 +216,7 @@ $fullUrl = "$protocol://$host$uri";
       });
     });
   </script>
+  <script src="/js/chatting.js"></script>
   <script>
     const {
       createApp,

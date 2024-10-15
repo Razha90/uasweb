@@ -4,7 +4,11 @@ module.exports = {
     './views/*.php',
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        "canvas": "calc(78vh - 2.5rem)",
+      }
+    },
   },
   plugins: [],
 }
