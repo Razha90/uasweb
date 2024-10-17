@@ -1,7 +1,6 @@
 {
     "require": {
-        "altorouter/altorouter": "^2.0",
-        "cboden/ratchet": "^0.4.4"
+        "altorouter/altorouter": "^2.0"
     },
     "scripts": {
         "serve": "php -S localhost:8001 -t public",
