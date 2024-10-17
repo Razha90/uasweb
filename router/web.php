@@ -3,6 +3,8 @@ require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../controller/userController.php';
 require_once __DIR__ . '/../middleware/authLogin.php';
 require_once __DIR__ . '/../middleware/authLogout.php';
+require_once __DIR__ . '/../middleware/authAdmin.php';
+
 
 
 $router = new AltoRouter();
@@ -10,6 +12,13 @@ $userController = new UserController();
 
 $router->map('GET', '/', function() {
     require __DIR__ . '/../views/home.php';
+});
+
+$router->map('GET', '/chat', function() {
+    authAdmin(function(){
+        require __DIR__ . '/../views/chat.php';
+    });
+    
 });
 
 $router->map('GET', '/register', function() {

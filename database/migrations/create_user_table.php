@@ -40,7 +40,7 @@ try {
             receiver_id VARCHAR(12),
             message TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (sender_id) REFERENCES users (id),
+            FOREIGN KEY (sender_id) REFERENCES users (id)
             FOREIGN KEY (receiver_id) REFERENCES users (id)
         )
     ";

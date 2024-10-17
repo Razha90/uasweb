@@ -1,86 +1,211 @@
-[2024-06-27 07:24:48][[ERROR]] 
-[2024-06-27 07:26:35][[ERROR]] 
-[2024-06-27 07:26:59][[ERROR]] 
-[2024-06-27 07:27:47][[ERROR]] 
-13d6a6ba01272e0961f092e3[2024-06-27 07:52:40][SUCCESS] Book deleted successfully
-[2024-06-27 08:10:04][SUCCESS] Book added successfully
-bc2605ad2dba116ef74a2302[2024-06-27 08:10:06][SUCCESS] Book deleted successfully
-ae5aa5abfc7e24ee03f767c3[2024-06-27 08:10:10][SUCCESS] Book deleted successfully
-98c5219b198d089254f4e82b[2024-06-27 08:11:05][SUCCESS] Book deleted successfully
-0e5fb9f96c665492ca1e82f2[2024-06-27 08:11:14][SUCCESS] Book deleted successfully
-a82ee47a7f6602f044e48a0d[2024-06-27 08:13:23][SUCCESS] Book deleted successfully
-[2024-06-27 08:14:22][SUCCESS] User razha90 has been logged in
-[2024-06-27 08:14:22][[ERROR]] be14e99d53647e5dccb11c6f
-[2024-06-27 11:10:39][SUCCESS] User razha90 has been logged in
-[2024-06-27 11:10:39][[ERROR]] be14e99d53647e5dccb11c6f
-[2024-06-27 11:11:36][ERROR] Title: Cara Berjalan, Author: Herdesi, Synopsis: Suatu hari kan bersama, Published Year: 2024, Image URL: f8628482e3df39697c6740bd.jpeg
-[2024-06-27 11:11:36][SUCCESS] Book added successfully
-b5a103babaf112eabc596511[2024-06-27 11:11:54][SUCCESS] Book deleted successfully
-[2024-06-27 11:12:01][SUCCESS] Book added successfully
-aeb509c48fb3c00fc47ab93b[2024-06-27 11:12:06][SUCCESS] Book deleted successfully
-[2024-10-15 10:09:08][SUCCESS] User razha90 has been registered
-[2024-10-15 10:09:17][SUCCESS] User razha90 has been logged in
-[2024-10-15 10:09:17][[ERROR]] be14e99d53647e5dccb11c6f
-[2024-10-15 10:51:06][SUCCESS] User razha90 has been logged in
-[2024-10-15 10:51:06][[ERROR]] be14e99d53647e5dccb11c6f
-[2024-10-15 15:52:08][SUCCESS] User razha90 has been logged in
-[2024-10-15 15:52:08][[ERROR]] be14e99d53647e5dccb11c6f
-[2024-10-15 16:29:03][ERROR] Title: Matematika, Author: Robet Kyosaki, Synopsis:     <article>
-        <p>Matematika adalah fondasi dari berbagai ilmu pengetahuan dan memiliki peran penting dalam kehidupan sehari-hari.</p>
-
-        <h2>Apa Itu Matematika?</h2>
-        <p>Matematika adalah ilmu yang mempelajari angka, ruang, struktur, dan perubahan. Dari penghitungan sederhana hingga teori kompleks, matematika membantu kita memahami dunia di sekitar kita.</p>
-
-        <h2>Jenis Operasi Matematika</h2>
-        <ul>
-            <li><strong>Penjumlahan</strong> - Menambahkan dua atau lebih angka.</li>
-            <li><strong>Pengurangan</strong> - Mengurangi satu angka dari angka lainnya.</li>
-            <li><strong>Perkalian</strong> - Mengalikan dua angka atau lebih.</li>
-            <li><strong>Pembagian</strong> - Membagi satu angka dengan angka lainnya.</li>
-        </ul>
-
-        <h2>Contoh Penerapan Matematika</h2>
-        <p>Matematika digunakan dalam kehidupan sehari-hari seperti menghitung jarak, kecepatan, dan waktu, serta dalam aktivitas sehari-hari seperti berbelanja.</p>
-
-        <figure>
-            <img src="dummy-image.jpg" alt="Ilustrasi Matematika" />
-            <figcaption>Gambar 1: Ilustrasi penggunaan matematika dalam kehidupan.</figcaption>
-        </figure>
-
-        <h2>Kesimpulan</h2>
-        <p>Memahami matematika dasar sangat penting untuk membantu kita dalam banyak aspek kehidupan, dari pekerjaan hingga kehidupan sehari-hari.</p>
-    </article>
-
-    <article>
-        <p>Matematika juga penting dalam sains dan teknologi. Dalam bidang fisika, matematika digunakan untuk memahami gerak benda dan energi. Dalam biologi, matematika digunakan untuk memodelkan pertumbuhan populasi dan aliran darah.</p>
-
-        <h2>Peran Matematika dalam Teknologi</h2>
-        <p>Dengan kemajuan teknologi, matematika menjadi lebih penting dalam pengembangan perangkat lunak, enkripsi data, dan kecerdasan buatan (AI).</p>
-
-        <h2>Matematika dan Statistik</h2>
-        <p>Statistik adalah cabang matematika yang digunakan untuk menganalisis data. Statistik penting dalam banyak bidang seperti ekonomi, kesehatan, dan penelitian ilmiah.</p>
-
-        <ul>
-            <li><strong>Analisis Data</strong> - Statistik membantu mengumpulkan dan menganalisis data untuk menemukan tren dan pola.</li>
-            <li><strong>Prediksi</strong> - Dengan statistik, kita bisa membuat prediksi berdasarkan data historis.</li>
-        </ul>
-
-        <figure>
-            <img src="dummy-image2.jpg" alt="Grafik Matematika" />
-            <figcaption>Gambar 2: Contoh penggunaan statistik dalam analisis data.</figcaption>
-        </figure>
-
-        <h2>Matematika dan Keuangan</h2>
-        <p>Dalam bidang keuangan, matematika digunakan untuk menghitung bunga, investasi, dan risiko. Memahami konsep keuangan dasar seperti persentase dan perhitungan bunga sangat penting dalam kehidupan sehari-hari.</p>
-    </article>
-
-, Published Year: 2004, Image URL: 91fa3c262147725096a87a28.jpeg
-[2024-10-15 16:29:03][SUCCESS] Book added successfully
-[2024-10-15 17:23:30][SUCCESS] File migrasi create_book_loans_table.php berhasil dijalankan.
-[2024-10-15 17:23:30][SUCCESS] File migrasi create_book_table.php berhasil dijalankan.
-[2024-10-15 17:23:30][SUCCESS] File migrasi create_user_table.php berhasil dijalankan.
-[2024-10-15 17:23:30][SUCCESS] Semua file migrasi berhasil dijalankan.
-[2024-10-15 17:55:44][ERROR] Failed to login user razha90
-[2024-10-15 17:55:58][SUCCESS] User razha90 has been registered
-[2024-10-15 17:56:07][SUCCESS] User razha90 has been logged in
-[2024-10-15 17:56:07][[ERROR]] cd39c374b22fe783c02677a5
+[2024-10-16 18:19:54][ERROR] Call to a member function bindParam() on false
+[2024-10-16 18:19:54][WARNING] Data pesan tidak ditemukan.
+[2024-10-16 18:21:52][ERROR] Call to a member function bindParam() on false
+[2024-10-16 18:22:20][ERROR] Call to a member function bindParam() on false
+[2024-10-16 18:23:00][ERROR] Call to a member function bindParam() on false
+[2024-10-16 18:24:37][WARNING] Array
+[2024-10-16 18:26:32][WARNING] Array.id
+[2024-10-16 18:27:03][WARNING] Array.id
+[2024-10-16 18:27:03][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:27:31][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:27:54][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:37:23][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:39:28][WARNING] kamu
+[2024-10-16 18:39:41][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:40:17][SUCCESS] User user1 has been logged in
+[2024-10-16 18:40:17][[ERROR]] 3529f1e9052bed49c76c71d3
+[2024-10-16 18:43:27][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:43:41][WARNING] hay
+[2024-10-16 18:43:44][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:43:54][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:44:04][WARNING] gaje
+[2024-10-16 18:44:07][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:45:11][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:46:06][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:48:05][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:48:48][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:49:01][WARNING] sudah makan belom
+[2024-10-16 18:50:29][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:50:34][WARNING] gaje
+[2024-10-16 18:50:34][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:50:39][WARNING] hay
+[2024-10-16 18:50:39][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:55:47][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:55:53][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:57:38][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:57:44][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:58:31][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:58:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:58:37][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:58:39][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 18:58:42][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:16][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:19][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:21][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:22][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:23][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:25][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:04:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-16 19:05:31][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 03:55:35][SUCCESS] User razha has been logged in
+[2024-10-17 03:55:35][[ERROR]] 312c09c4303b94a7d9400707
+[2024-10-17 03:55:35][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:03:30][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:48:37][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:48:58][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:54:54][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:55:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:56:16][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:59:17][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:59:23][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 04:59:25][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:02:49][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:02:56][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:03:31][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:04:08][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:04:18][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:05:01][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:05:03][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:05:13][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:05:35][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:05:44][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:05:59][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:06:22][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:07:15][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:07:18][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:07:54][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:07:56][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:08:57][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:08:58][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:08:59][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:09:10][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:09:11][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:09:29][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:09:47][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:10:01][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:19:32][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:20:00][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:20:03][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:20:20][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:20:21][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:20:22][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:38:06][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:38:09][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:44:38][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:44:41][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:45:05][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:45:07][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:54:21][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:54:24][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:54:31][WARNING] bangke
+[2024-10-17 05:55:05][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:55:18][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:57:27][SUCCESS] User user2 has been registered
+[2024-10-17 05:57:31][SUCCESS] User user2 has been logged in
+[2024-10-17 05:57:31][[ERROR]] 08265423bedf94d2983836d3
+[2024-10-17 05:57:37][WARNING] hay
+[2024-10-17 05:57:37][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:57:44][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:59:38][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:59:41][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:59:43][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:59:46][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 05:59:47][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:00:44][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:00:48][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:00:55][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:02:52][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:02:54][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:02:55][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:03:58][WARNING] hay
+[2024-10-17 06:04:02][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:04:03][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:04:34][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:04:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:04:55][WARNING] kontol
+[2024-10-17 06:04:59][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:05:02][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:17:41][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:17:42][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:18:35][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:18:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:18:41][WARNING] gaje
+[2024-10-17 06:20:07][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:20:11][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:20:15][WARNING] asasas
+[2024-10-17 06:20:48][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:20:51][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:20:56][WARNING] asasa
+[2024-10-17 06:25:17][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:25:20][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:25:25][WARNING] hay
+[2024-10-17 06:25:26][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:28:22][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:28:23][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:29:55][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:30:43][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:31:45][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:31:46][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:32:10][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:32:11][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:33:27][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:33:29][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:33:58][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:33:59][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:34:24][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:34:25][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:34:34][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:34:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:35:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:35:38][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:36:24][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:36:26][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:37:07][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:37:10][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:37:40][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:38:23][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:38:37][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:39:15][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:39:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:40:26][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:40:31][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:40:33][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:40:34][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:01][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:03][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:04][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:39][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:41][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:42][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:41:47][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:42:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:42:38][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:42:42][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:42:43][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:45:27][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:45:30][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:45:41][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:45:42][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:47:18][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:47:20][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:47:56][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:47:57][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:50:57][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:50:58][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:51:58][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:51:59][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:55:37][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:55:39][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:25][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:26][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:28][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:30][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:31][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:32][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:33][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:35][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:36][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:56:37][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:57:15][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:57:16][WARNING] Data pesan ditemukan, menampilkan data pesan.
+[2024-10-17 06:57:25][WARNING] Data pesan ditemukan, menampilkan data pesan.

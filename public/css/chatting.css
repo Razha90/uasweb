@@ -86,10 +86,14 @@
 }
 
 .chat-body {
-  max-height: 300px; /* Mengatur tinggi maksimal jendela chat */
+  max-height: 300px;
+}
+
+.chat-wrap{
+  max-height: 100%;
   overflow-y: auto;
   display: flex;
-  flex-direction: column; /* Membuat scroll ketika isi chat lebih banyak dari tinggi maksimal */
+  flex-direction: column;
 }
 
 .chat-bubble {

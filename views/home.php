@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION['display_name'])) {
   $logged_in = true;
+  $id = $_SESSION['id'];
   $display_name = $_SESSION['display_name'];
   $username = $_SESSION['username'];
   $role = $_SESSION['role'] == 'admin';
@@ -196,33 +197,54 @@ $fullUrl = "$protocol://$host$uri";
         class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{{pagination.next_page}}</button>
     </div>
     <div v-else>
-      <h1 class="text-4xl text-center w-full font-bold text-indigo-500">Tidak Ada Informasi Buku</h1>
+      <h1 class="text-4xl text-center w-full font-bold text-indigo-500">Tidak Ada Informasi Materi yang bisa diakses!
+      </h1>
     </div>
-  </div>
-  </div>
 
-  <div id="floating-button" class="floating-button ">
-    <img src="/img/messenger.png" alt="Chat" />
-  </div>
 
-  <!-- Jendela Chat -->
-  <div id="chat-window" class="chat-window hidden">
-    <div class="chat-header">
-      <h3>Mental Care</h3>
-      <button id="close-chat" class="close-btn">X</button>
-    </div>
-    <div class="chat-body">
-      <div class="chat-bubble sender">
-        <p>Halo! Ada yang bisa saya bantu?</p>
-      </div>
-      <div class="chat-bubble receiver">
-        <p>Saya butuh informasi tentang layanan yang tersedia.</p>
-      </div>
-    </div>
-    <div class="chat-footer">
-      <input type="text" name="message" :value="inputChat" placeholder="Tulis Pesan..." />
-      <button>Send</button>
-    </div>
+    <?php if ($logged_in): ?>
+      <?php if ($role == 'admin'): ?>
+        <div id="floating-button" class="floating-button" v-on:click="goChat">
+          <img src="/img/messenger.png" alt="Chat" />
+        </div>
+      <?php else: ?>
+        <div id="floating-button" class="floating-button" v-on:click="activeChat">
+          <img src="/img/messenger.png" alt="Chat" />
+        </div>
+
+        <!-- Jendela Chat -->
+        <div id="chat-window" class="chat-window" :class="{'hidden' : chatOpen}">
+          <div class="chat-header">
+            <h3>Mental Care</h3>
+            <button id="close-chat" class="close-btn" v-on:click="activeChat">X</button>
+          </div>
+          <div class="chat-body">
+            <?php if ($logged_in): ?>
+              <div v-for="message in messages" v-if="messages.length > 0" class="chat-wrap">
+                <div class="chat-bubble sender" v-if="message.sender_id == '<?= $id ?>'">
+                  <p>{{ message.message }}</p>
+                </div>
+                <div class="chat-bubble receiver" v-else>
+                  <p>{{ message.message }}</p>
+                </div>
+              </div>
+              <div v-else>
+                <div>Belum ada pesan</div>
+              </div>
+            <?php else: ?>
+              <div>Maaf Kamu Harus Login Terlebih dahulu!</div>
+            <?php endif; ?>
+
+          </div>
+          <?php if ($logged_in): ?>
+            <div class="chat-footer">
+              <input type="text" name="message" v-model="inputChat" placeholder="Tulis Pesan..." />
+              <button v-on:click="sendMessage">Send</button>
+            </div>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+    <?php endif; ?>
   </div>
 
   <script>
@@ -247,12 +269,13 @@ $fullUrl = "$protocol://$host$uri";
       });
     });
   </script>
-  <script src="/js/chatting.js"></script>
   <script>
     const {
       createApp,
       ref,
-      reactive
+      reactive,
+      onMounted,
+      onBeforeUnmount
     } = Vue
 
     createApp({
@@ -260,6 +283,32 @@ $fullUrl = "$protocol://$host$uri";
         const searchs = ref([]);
         const pagination = ref({});
         const inputChat = ref('');
+        const chatOpen = ref(true);
+        const messages = ref([]);
+
+        async function getMessage() {
+          await fetch(`/api/message/<?= isset($id) ? $id : null ?>`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.status === 'success') {
+                messages.value = data.data;
+              } else {
+                messages.value = [];
+              }
+            });
+        }
+
+        <?php if ($logged_in): ?>
+          onMounted(() => {
+            getMessage();
+          });
+        <?php endif; ?>
+
         async function searchBook(page = 1, search = '') {
           fetch(`/api/books?page=${page}&name=${search}`, {
             method: 'GET',
@@ -295,53 +344,66 @@ $fullUrl = "$protocol://$host$uri";
         }
 
         function extractTextFromHTML(htmlString) {
-          // Membuat elemen sementara untuk menampung HTML yang diterima
           const tempDiv = document.createElement('div');
           tempDiv.innerHTML = htmlString;
-
-          // Mencari elemen <p> pertama
           const firstParagraph = tempDiv.querySelector('p');
           if (firstParagraph) {
-            return firstParagraph.innerText; // Mengembalikan teks paragraf pertama
+            return firstParagraph.innerText;
           }
-
-          // Mencari heading (h2 hingga h6)
           for (let i = 2; i <= 6; i++) {
             const heading = tempDiv.querySelector(`h${i}`);
             if (heading) {
-              return heading.innerText; // Mengembalikan teks heading pertama yang ditemukan
+              return heading.innerText;
             }
           }
-
-          return 'Tidak ada detail'; // Jika tidak ada elemen yang ditemukan
+          return 'Tidak ada detail';
         }
 
-        const socket = new WebSocket('ws://localhost:8082');
-
-        socket.onopen = function () {
-          console.log('Connected to WebSocket server');
-        };
-
-        socket.onmessage = function (event) {
-          alert(event.data);
-        };
 
         function sendMessage() {
-          const msg = {
-            sender_id: ,
-            receiver_id: receiverId,
-            message: message
-          };
-          socket.send(JSON.stringify(msg));
-          messageInput.value = '';
+          const formData = new FormData();
+          formData.append('message', inputChat.value);
+          formData.append('sender_id', "<?= isset($id) ? $id : null ?>");
+          formData.append('receiver_id', "admin");
+
+          fetch('/api/message', {
+            method: 'POST', // Metode POST
+            body: formData // Mengirimkan FormData sebagai body
+          })
+            .then(response => response.text()) // Mengambil response dalam bentuk teks
+            .then(data => {
+              if (data.includes('status=success')) {
+                inputChat.value = '';
+                getMessage();
+              } else {
+                alert('Failed to send message');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+
         }
-        searchBook();
+
+        function activeChat() {
+          chatOpen.value = !chatOpen.value;
+        }
+
+        function goChat() {
+          window.location.href = '/chat';
+        }
+
         return {
           searchs,
           pagination,
           searchBook,
           extractTextFromHTML,
-          inputChat
+          inputChat,
+          chatOpen,
+          activeChat,
+          sendMessage,
+          messages,
+          goChat
         }
       }
     }).mount('#app')

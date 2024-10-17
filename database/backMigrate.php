@@ -6,7 +6,7 @@ try {
 require_once __DIR__ . '/con_database.php';
     $db = new SQLite3($dbPath);
 
-    $tables = ['books','users'];
+    $tables = ['books','users', 'book_loans', 'messages'];
 
     foreach ($tables as $table) {
         $query = "DROP TABLE IF EXISTS $table";
