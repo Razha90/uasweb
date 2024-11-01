@@ -39,8 +39,16 @@ $router->map('GET', '/logout', function () use ($userController){
 });
 
 
-$router->map('GET', '/add-book', function() {
-    require __DIR__ . '/../views/addBook.php';
+$router->map('GET', '/add-materi', function() {
+    require __DIR__ . '/../views/addMateri.php';
+});
+
+$router->map('GET', '/quiz/[:id]', function($id) {
+    require __DIR__ . '/../views/quiz.php';
+});
+
+$router->map('GET', '/add-quiz', function() {
+    require __DIR__ . '/../views/addQuiz.php';
 });
 
 $router->map('GET', '/404', function() {

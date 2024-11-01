@@ -136,11 +136,20 @@ $fullUrl = "$protocol://$host$uri";
 
           </div>
         </form>
-        <div>
+        <div class="flex flex-row">
           <?php if ($role): ?>
             <button id="add-book" type="button"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex flex-row justify-center items-center gap-2">
-              <p>Add</p>
+              <p>Tambah Materi</p>
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </button>
+            <button id="add-quiz" type="button"
+              class="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-lime-600 dark:hover:bg-lime-700 focus:outline-none dark:focus:ring-lime-800 flex flex-row justify-center items-center gap-2">
+              <p>Tambah Quiz</p>
               <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -265,7 +274,12 @@ $fullUrl = "$protocol://$host$uri";
 
       let addBook = document.getElementById('add-book');
       addBook.addEventListener('click', function () {
-        window.location.href = '/add-book';
+        window.location.href = '/add-materi';
+      });
+
+      let addQuiz = document.getElementById('add-quiz');
+      addQuiz.addEventListener('click', function () {
+        window.location.href = '/add-quiz';
       });
     });
   </script>
@@ -306,6 +320,7 @@ $fullUrl = "$protocol://$host$uri";
         <?php if ($logged_in): ?>
           onMounted(() => {
             getMessage();
+            searchBook();
           });
         <?php endif; ?>
 

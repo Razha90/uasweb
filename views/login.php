@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Online</title>
+  <title>Pembelajaraan Online</title>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="icon" href="/img/Icon-Perpustakaan.png" type="image/png">
 </head>
 <body>  
 <header class="w-full">
       <div class="w-full h-20 py-4 flex justify-center items-center border-b-2 border-b-gray-900">
-        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PERPUSTAKAAN ONLINE</h1>
+        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PEMBELAJARAN ONLINE</h1>
       </div>
       <div class="w-full flex justify-start items-center bg-sky-950 p-3">
         <nav>

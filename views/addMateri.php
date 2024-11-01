@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Online</title>
+  <title>Pembelajaraan Online</title>
   <link rel="stylesheet" href="/css/app.css">
   <link rel="icon" href="/img/Icon-Perpustakaan.png" type="image/png">
 </head>
@@ -42,7 +42,7 @@
   </div>
   <header class="w-full">
   <div class="w-full h-20 py-4 flex justify-center items-center border-b-2 border-b-gray-900">
-        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PERPUSTAKAAN ONLINE</h1>
+        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PEMBELAJARAN ONLINE</h1>
       </div>
     <div class="w-full flex justify-start items-center bg-sky-950 p-3">
       <nav>
@@ -58,7 +58,7 @@
       </nav>
     </div>
   </header>
-  <form class="max-w-md mx-auto mt-16 bg-slate-900 py-5 px-6 rounded-xl" id="bookForm">
+  <form class="max-w-[90%] mx-auto mt-16 bg-slate-900 py-5 px-6 rounded-xl" id="bookForm">
     <h1 class="text-2xl font-extrabold text-white text-center my-8">Tambahkan Materi Baru</h1>
     <div class="relative z-0 w-full mb-5 group">
       <input type="text" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -82,7 +82,7 @@
 
     </div>
     <div class="text-center my-3">
-      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tambahkan Buku</button>
+      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tambahkan Materi</button>
 
     </div>
   </form>
