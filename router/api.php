@@ -4,11 +4,13 @@ require __DIR__ . '/../controller/bookController.php';
 require __DIR__ . '/../controller/bookLoanController.php';
 require __DIR__ . '/../middleware/apiNoLogin.php';
 require __DIR__ . '/../controller/messageController.php';
+require __DIR__ . '/../controller/quizController.php';
 
 $router = new AltoRouter();
 $bookController = new bookController();
 $bookLoansController = new BookLoanController();
 $messageController = new messageController();
+$quizController = new QuizController();
 
 $router->map('GET', '/api/books', [$bookController, 'getBooks']);
 
@@ -24,6 +26,13 @@ $router->map('POST', '/api/message', [$messageController, 'addMessage']);
 $router->map('GET', '/api/message/[:id]', [$messageController, 'getMessage']);
 $router->map('GET', '/api/message/user/[:id]', [$messageController, 'getUser']);
 $router->map('GET', '/api/message/[:receiver_id]/[:sender_id]', [$messageController, 'getReveiverAndSender']);
+
+$router->map('POST', '/api/quiz', [$quizController, 'addQuiz']);
+$router->map('GET', '/api/quiz/[:id]', [$quizController, 'getQuizById']);
+$router->map('POST', '/api/quiz/update/[:id]', [$quizController, 'updateQuiz']);
+
+
+
 
 
 

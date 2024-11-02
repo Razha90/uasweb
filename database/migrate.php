@@ -9,10 +9,14 @@ try {
     $files = scandir($migrationsDir);
 
     foreach ($files as $file) {
-        if ($file !== '.' && $file !== '..' && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
-            $filePath = $migrationsDir . $file;
-            require_once $filePath;
-            $logs->success("File migrasi $file berhasil dijalankan.");
+        try {
+            if ($file !== '.' && $file !== '..' && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                $filePath = $migrationsDir . $file;
+                require_once $filePath;
+                $logs->success("File migrasi $file berhasil dijalankan.");
+            }
+        } catch (Exception $e) {
+            $logs->error("Error migrasi file $file: " . $e->getMessage());
         }
     }
 

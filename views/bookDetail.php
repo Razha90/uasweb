@@ -394,7 +394,7 @@ $fullUrl = "$protocol://$host$uri";
               }
 
             } else {
-              showAlert(false);
+              // showAlert(false);
               isBookLoan.value = true;
               dataBookLoan.value = [];
             }

@@ -163,11 +163,13 @@ $fullUrl = "$protocol://$host$uri";
         <div v-for="search in searchs">
           <div
             class="w-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex justify-center items-center h-[190px] overflow-hidden">
+            <div v-if="search.type == 'materi'" class="flex justify-center items-center h-[190px] overflow-hidden">
               <img v-if="search.image_url.length > 0" class="rounded-t-lg" :src="'/img/'+search.image_url"
                 :alt="search.title" />
               <img v-else class="rounded-t-lg" src="/img/question-mark.png" :alt="search.title" />
-
+            </div>
+            <div v-else class="flex justify-center items-center h-[190px] overflow-hidden">
+              <img v-else class="rounded-t-lg" src="/img/question-mark.png" :alt="search.title" />
             </div>
             <div class="p-5">
               <a href="#">
@@ -175,10 +177,10 @@ $fullUrl = "$protocol://$host$uri";
                   class="h-[40px] w-full mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white overflow-hidden text-ellipsis whitespace-nowrap">
                   {{ search.title }}</h5>
               </a>
-              <p class="w-[258px] line-clamp-3 mb-3 font-normal text-gray-700 dark:text-gray-400">{{
+              <p v-if="search.type == 'materi'" class="w-[258px] line-clamp-3 mb-3 font-normal text-gray-700 dark:text-gray-400">{{
                 extractTextFromHTML(search.synopsis) }}
               </p>
-              <a :href="'/book-detail?detail=' + search.id"
+              <a v-if="search.type == 'materi'" :href="'/book-detail?detail=' + search.id"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Materi Pembelajaran
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -187,6 +189,27 @@ $fullUrl = "$protocol://$host$uri";
                     d="M1 5h12m0 0L9 1m4 4L9 9" />
                 </svg>
               </a>
+
+              <div  v-else>
+              <a v-if="!role" :href="'/book-detail?detail=' + search.id"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                Mulai Quiz
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 14 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                </svg>
+              </a>
+              <a v-else :href="'/quiz/' + search.id"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                Edit Quiz
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 14 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                </svg>
+              </a>
+              </div>
             </div>
           </div>
 
@@ -299,6 +322,7 @@ $fullUrl = "$protocol://$host$uri";
         const inputChat = ref('');
         const chatOpen = ref(true);
         const messages = ref([]);
+        const role = ref(<?= $role ?>);
 
         async function getMessage() {
           await fetch(`/api/message/<?= isset($id) ? $id : null ?>`, {
@@ -347,6 +371,8 @@ $fullUrl = "$protocol://$host$uri";
                   prev_page: null
                 };
               }
+            }).catch(error => {
+              console.error('Error:', error);
             });
         };
 
@@ -418,7 +444,8 @@ $fullUrl = "$protocol://$host$uri";
           activeChat,
           sendMessage,
           messages,
-          goChat
+          goChat,
+          role
         }
       }
     }).mount('#app')

@@ -4,24 +4,67 @@ require_once __DIR__ . '/../database/logger.php';
 
 final class bookController
 {
-  public function getBooks()
+//   public function getBooks()
+// {
+//     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+//     $limit = 10;
+//     $book = new Book();
+//     header('Content-Type: application/json');
+
+//     $offset = ($page - 1) * $limit;
+//     $searchTerm = isset($_GET['name']) ? $_GET['name'] : null;
+//     $allBooks = $book->getBooks($searchTerm);
+    
+//     $totalBooks = count($allBooks);
+
+//     $books = array_slice($allBooks, $offset, $limit);
+    
+
+//     if (!empty($books)) {
+//         $totalPages = ceil($totalBooks / $limit);
+
+//         $prevPage = ($page > 1) ? $page - 1 : null;
+//         $nextPage = ($page < $totalPages) ? $page + 1 : null;
+
+//         // Respons JSON
+//         echo json_encode([
+//             'status' => 'success',
+//             'data' => $books,
+//             'pagination' => [
+//                 'total_pages' => $totalPages,
+//                 'current_page' => $page,
+//                 'prev_page' => $prevPage,
+//                 'next_page' => $nextPage
+//             ]
+//         ]);
+//     } else {
+//         echo json_encode([
+//             'status' => 'error',
+//             'message' => 'Failed to get books data.'
+//         ]);
+//     }
+// }
+
+public function getBooks()
 {
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $limit = 10;
+    $offset = ($page - 1) * $limit;
+    $searchTerm = isset($_GET['name']) ? $_GET['name'] : null;
+
     $book = new Book();
     header('Content-Type: application/json');
 
-    $offset = ($page - 1) * $limit;
-    $searchTerm = isset($_GET['name']) ? $_GET['name'] : null;
-    $allBooks = $book->getBooks($searchTerm);
+    // Mengambil data gabungan books dan quizzes
+    $allData = json_decode($book->getBooks($searchTerm), true);
 
-    $totalBooks = count($allBooks);
+    // Cek apakah data tersedia
+    if (!empty($allData)) {
+        $totalItems = count($allData);
+        $totalPages = ceil($totalItems / $limit);
 
-    $books = array_slice($allBooks, $offset, $limit);
-    
-
-    if (!empty($books)) {
-        $totalPages = ceil($totalBooks / $limit);
+        // Ambil data berdasarkan offset dan limit untuk pagination
+        $pagedData = array_slice($allData, $offset, $limit);
 
         $prevPage = ($page > 1) ? $page - 1 : null;
         $nextPage = ($page < $totalPages) ? $page + 1 : null;
@@ -29,7 +72,7 @@ final class bookController
         // Respons JSON
         echo json_encode([
             'status' => 'success',
-            'data' => $books,
+            'data' => $pagedData,
             'pagination' => [
                 'total_pages' => $totalPages,
                 'current_page' => $page,
@@ -40,10 +83,11 @@ final class bookController
     } else {
         echo json_encode([
             'status' => 'error',
-            'message' => 'Failed to get books data.'
+            'message' => 'Failed to get combined data.'
         ]);
     }
 }
+
 
   public function addBooks()
   {
@@ -79,7 +123,6 @@ final class bookController
         }
       }
 
-      $logs->error("Title: $title, Author: $author, Synopsis: $synopsis, Published Year: $published_year, Image URL: $image_url");
 
       $randomId = bin2hex(random_bytes(12));
 

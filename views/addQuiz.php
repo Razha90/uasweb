@@ -125,6 +125,11 @@ $fullUrl = "$protocol://$host$uri";
     <main class="container mx-auto">
       <div class="max-w-[90%] mx-auto mt-16 bg-slate-900 py-5 px-6 rounded-xl" id="quizForm">
         <h1 class="text-2xl font-extrabold text-white text-center my-8">Tambahkan Quiz Baru</h1>
+        <div class="relative z-0 w-full mb-5 group">
+          <label for="title" class="text-white">Judul Quiz</label>
+          <input type="text" id="title" name="title" class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1"
+            v-model="title">
+        </div>
         <div v-for="data in dataQuiz" :key="data.id">
           <h3 class="text-white font-bold text-4xl">Quiz {{data.id}}</h3>
           <div class="relative z-0 w-full mb-5 group">
@@ -232,6 +237,7 @@ $fullUrl = "$protocol://$host$uri";
     createApp({
       setup() {
         const dataQuiz = reactive([]);
+        const title = ref('');
         const modelQuiz = {
           question: '',
           option1: '',
@@ -282,27 +288,55 @@ $fullUrl = "$protocol://$host$uri";
 
         }
 
-        function saveQuiz() {
-          fetch('/api/quiz', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataQuiz),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.status === 'success') {
-                alert('Quiz berhasil ditambahkan');
-                window.location.href = '/quiz';
-              } else {
-                showAlert();
-              }
+        function checkData() {
+          if (title.value === '') {
+            alert('Judul Quiz tidak boleh kosong');
+            return false;
+          }
+
+          for (let i = 0; i < dataQuiz.length; i++) {
+            const quiz = dataQuiz[i];
+            if (quiz.question === '' || quiz.option1 === '' || quiz.option2 === '' || quiz.option3 === '' || quiz.option4 === '' || quiz.answer === '') {
+              alert('Data Quiz tidak boleh kosong');
+              return false;
+            }
+          }
+
+          return true;
+        }
+
+        async function saveQuiz() {
+          if (checkData()) {
+            fetch('/api/quiz', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(
+                {
+                  title: title.value,
+                  data: toRaw(dataQuiz),
+                }
+              ),
             })
-            .catch((error) => {
-              console.error('Error:', error);
-              showAlert();
-            });
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === 'success') {
+                  dataQuiz.splice(0, dataQuiz.length);
+                  questionId.value = 1;
+
+                  addQuiz();
+                  title.value = '';
+                  alert('Quiz berhasil ditambahkan');
+                } else {
+                  showAlert();
+                }
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+                showAlert();
+              });
+          }
         }
 
 
@@ -311,6 +345,7 @@ $fullUrl = "$protocol://$host$uri";
           addQuiz,
           removeQuiz,
           saveQuiz,
+          title
         }
       }
     }).mount('#app')
