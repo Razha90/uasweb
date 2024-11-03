@@ -123,15 +123,32 @@ $fullUrl = "$protocol://$host$uri";
       </div>
     </header>
     <main class="container mx-auto">
+      <div class="max-w-[90%] mx-auto mt-16 bg-slate-900 py-5 px-6 rounded-xl">
+        <h2 class="text-center text-2xl font-bold text-white border-b-4  pb-1 mb-6">
+          Data Score
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+          <div v-for="user in userScore" :key="user.id"
+            class="bg-white shadow-md rounded-lg p-6 border border-gray-200 transition-transform transform hover:scale-105">
+            <h3 class="text-xl font-semibold text-indigo-700">{{ user.display_name }}</h3>
+            <p class="text-gray-600">Score: <span class="font-bold">{{ user.score }}</span></p>
+            <!-- <p class="text-gray-600">Rank: <span class="font-semibold">{{ user.rank }}</span></p> -->
+            <p class="text-gray-500 text-sm">Date: {{ formatDate(user.created_at) }}</p>
+
+          </div>
+        </div>
+
+      </div>
       <div class="max-w-[90%] mx-auto mt-16 bg-slate-900 py-5 px-6 rounded-xl" id="quizForm">
-        <h1 class="text-2xl font-extrabold text-white text-center my-8">Perbarui Quiz Baru</h1>
+        <h1 class="text-2xl font-extrabold text-white text-center my-8">Tambahkan Quiz Baru</h1>
         <div class="relative z-0 w-full mb-5 group">
           <label for="title" class="text-white">Judul Quiz</label>
           <input type="text" id="title" name="title" class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1"
             v-model="title">
         </div>
-        <div v-for="data in dataQuiz" :key="data.id">
-          <h3 class="text-white font-bold text-4xl">Quiz {{data.id}}</h3>
+        <div v-for="data in dataQuiz" :key="data.order_number">
+          <h3 class="text-white font-bold text-4xl">Quiz {{data.order_number}}</h3>
           <div class="relative z-0 w-full mb-5 group">
             <label :for="`question-${data.id}`" class="text-white">Pertanyaan Quiz</label>
             <textarea :id="`question-${data.id}`" :name="`question-${data.id}`"
@@ -171,7 +188,7 @@ $fullUrl = "$protocol://$host$uri";
           <div>
             <button type="button"
               class="w-full bg-red-500 text-white p-3 rounded-lg mt-1 hover:bg-red-600 focus:outline-none mb-12"
-              v-on:click="removeQuiz(data.id)">Hapus Quiz</button>
+              v-on:click="deleteQuestion(data.id)">Hapus Pertanyaan</button>
           </div>
         </div>
 
@@ -183,6 +200,9 @@ $fullUrl = "$protocol://$host$uri";
           class="w-full bg-green-500 text-white p-3 rounded-lg mt-1 hover:bg-green-600 focus:outline-none"
           v-on:click="saveQuiz">Save
           Quiz</button>
+        <button type="button"
+          class="w-full bg-red-500 text-white p-3 rounded-lg mt-1 hover:bg-red-600 focus:outline-none"
+          v-on:click="deleteQuiz(dataId)">Hapus Permanen Quiz</button>
       </div>
     </main>
     <div class="h-6"></div>
@@ -237,7 +257,9 @@ $fullUrl = "$protocol://$host$uri";
     createApp({
       setup() {
         const dataQuiz = reactive([]);
+        const dataId = ref('');
         const title = ref('');
+        const userScore = reactive([]);
         const modelQuiz = {
           question: '',
           option1: '',
@@ -251,41 +273,79 @@ $fullUrl = "$protocol://$host$uri";
 
         const addQuiz = () => {
           const newQuestion = {
-            id: questionId.value,
+            type: 'new',
+            order_number: questionId.value,
             ...modelQuiz,
           };
           dataQuiz.push(newQuestion);
           questionId.value++;
-          console.log(toRaw(dataQuiz));
         };
 
-        onMounted(() => {
-          addQuiz();
+        async function getQuizById() {
+          const path = window.location.pathname;
+          const segments = path.split('/');
+          const id = segments[2];
+
+          fetch(`/api/quiz/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === 'success') {
+                title.value = '';
+                dataId.value = '';
+                dataQuiz.splice(0, dataQuiz.length);
+
+                // Isi nilai title dan dataId setelah mendapatkan data dari API
+                title.value = data.data.title;
+                dataId.value = data.data.id;
+                questionId.value = data.data.questions.length + 1;
+
+                data.data.questions.forEach((quiz) => {
+                  dataQuiz.push(quiz);
+                });
+
+                // Panggil getAllUserScore setelah dataId memiliki nilai
+                getAllUserScore();
+              } else {
+                showAlert();
+              }
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              showAlert();
+            });
+        }
+
+        onMounted(async () => {
+          await getQuizById();
         });
+
+        // Fungsi untuk mendapatkan skor user berdasarkan quiz ID
+        async function getAllUserScore() {
+          fetch(`/api/quiz/score/${dataId.value}`)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === 'success') {
+                console.log(data);
+                userScore.splice(0, userScore.length);
+                data.data.forEach((score) => {
+                  userScore.push(score);
+                });
+              } else {
+                showAlert();
+              }
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              showAlert();
+            });
+        }
+
         function showAlert() {
           const alertElement = document.getElementById('alertError');
           alertElement.classList.add('show');
           setTimeout(function () {
             alertElement.classList.remove('show');
           }, 3000);
-        }
-
-        function removeQuiz(id) {
-          if (confirm('Apakah Anda yakin ingin menghapus quiz ini?')) {
-            const index = dataQuiz.findIndex((quiz) => quiz.id === id);
-
-            if (index !== -1) {
-              dataQuiz.splice(index, 1);
-            }
-
-            dataQuiz.forEach((quiz, idx) => {
-              quiz.id = idx + 1;
-              if (idx === dataQuiz.length - 1) {
-                questionId.value = idx + 2;
-              }
-            });
-          }
-
         }
 
         function checkData() {
@@ -306,8 +366,15 @@ $fullUrl = "$protocol://$host$uri";
         }
 
         async function saveQuiz() {
+          console.log(
+            {
+              title: title.value,
+              id: questionId.value,
+              data: toRaw(dataQuiz),
+            }
+          );
           if (checkData()) {
-            fetch('/api/quiz', {
+            fetch('/api/quiz/update/' + dataId.value, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -315,6 +382,7 @@ $fullUrl = "$protocol://$host$uri";
               body: JSON.stringify(
                 {
                   title: title.value,
+                  id: questionId.value,
                   data: toRaw(dataQuiz),
                 }
               ),
@@ -322,12 +390,7 @@ $fullUrl = "$protocol://$host$uri";
               .then((response) => response.json())
               .then((data) => {
                 if (data.status === 'success') {
-                  dataQuiz.splice(0, dataQuiz.length);
-                  questionId.value = 1;
-
-                  addQuiz();
-                  title.value = '';
-                  alert('Quiz berhasil ditambahkan');
+                  getQuizById()
                 } else {
                   showAlert();
                 }
@@ -339,13 +402,82 @@ $fullUrl = "$protocol://$host$uri";
           }
         }
 
+        async function deleteQuestion(id) {
+          try {
+            const response = await fetch(`/api/question/del/${id}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({})
+            });
+
+            if (response.ok) {
+              const result = await response.json();
+              if (result.status === 'success') {
+                dataQuiz.forEach((quiz, idx) => {
+                  quiz.id = idx + 1;
+                  if (idx === dataQuiz.length - 1) {
+                    questionId.value = idx + 2;
+                  }
+                });
+                saveQuiz();
+              } else {
+                console.error('Failed to delete question. Message:', result.message);
+              }
+            } else {
+              console.error('Failed to delete question. Status:', response.status);
+            }
+          } catch (error) {
+            console.error('Error deleting question:', error);
+          }
+        }
+
+        async function deleteQuiz(id) {
+          if (confirm('Apakah anda yakin menghapus Quiz ini!')) {
+            try {
+              const url = `/api/quiz/delete/${id}`;
+              const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  id: id
+                })
+              });
+
+              if (response.ok) {
+                const result = await response.json();
+                if (result.status === 'success') {
+                  window.location.href = '/';
+                } else {
+                  console.error('Failed to delete question. Message:', result.message);
+                }
+              } else {
+                console.error('Failed to delete question. Status:', response.status);
+              }
+            } catch (error) {
+              console.error('Error deleting question:', error);
+            }
+          }
+        }
+
+        function formatDate(dateString) {
+          const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+          return new Date(dateString).toLocaleString('en-US', options);
+        }
 
         return {
           dataQuiz,
           addQuiz,
-          removeQuiz,
           saveQuiz,
-          title
+          title,
+          deleteQuestion,
+          deleteQuiz,
+          dataId,
+          userScore,
+          formatDate
         }
       }
     }).mount('#app')

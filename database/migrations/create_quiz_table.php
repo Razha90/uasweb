@@ -4,7 +4,7 @@ $logs = new Logger();
 
 try {
     require_once __DIR__ . '/../con_database.php';
-    
+
     $db = new SQLite3($dbPath);
 
     // Tabel kuis
@@ -58,6 +58,18 @@ try {
         END;
     ";
     $db->exec($questionTriggerQuery);
+
+    $scoreQuery = "
+    CREATE TABLE IF NOT EXISTS score (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id VARCHAR(12) REFERENCES users(id) ON DELETE CASCADE,
+        quiz_id INTEGER,
+        score INTEGER,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (quiz_id) REFERENCES quiz (id) ON DELETE CASCADE
+    )
+";
+    $db->exec($scoreQuery);
 
 } catch (PDOException $e) {
     $logs->error($e->getMessage());

@@ -121,21 +121,7 @@
 <script>
   let get_back = document.getElementById('back-button');
   get_back.addEventListener('click', function() {
-    const currentDomain = window.location.hostname; // Mendapatkan domain saat ini
-    const referrer = document.referrer;
-
-    if (referrer) {
-      // Cek apakah referrer dari domain yang sama
-      const referrerDomain = (new URL(referrer)).hostname;
-      if (referrerDomain === currentDomain) {
-        window.history.back();
-      } else {
-        window.location.href = window.location.protocol + "//" + currentDomain; // Kembali ke halaman utama
-      }
-    } else {
-      // Jika tidak ada history atau referrer
-      window.location.href = window.location.protocol + "//" + currentDomain; // Kembali ke halaman utama
-    }
+    window.location.href = '/';
   });
 </script>
 

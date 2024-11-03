@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        "canvas": "calc(78vh - 2.5rem)",
+        "canvas": "calc(88vh - 2.5rem)",
       }
     },
   },

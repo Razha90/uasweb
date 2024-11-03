@@ -80,17 +80,26 @@ $fullUrl = "$protocol://$host$uri";
 
 <body>
   <div id="app">
+    <div v-if="isScore" class="fixed inset-0 bg-gray-700 bg-opacity-50 backdrop-blur-sm z-40"></div>
+    <div v-if="isScore" class="absolute flex justify-center items-center w-[100vw] h-[100vh]">
+      <div class="p-10 bg-white rounded-lg shadow-lg text-center w-80 z-50">
+        <h2 class="text-2xl font-bold text-gray-800">Kamu Telah Menyelesaikan Kelas <br> {{title}}</h2>
+        <p class="mt-4 text-4xl font-extrabold text-blue-600">{{score}}</p>
+        <button v-on:click="back"
+          class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Kembali</button>
+      </div>
+    </div>
     <div id="alertError"
       class="alert p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
       <span class="font-medium">Gagal!</span> Data Quiz Baru Gagal Ditambahkan.
     </div>
-    <header class="w-full">
+    <header class="w-full h-[20vh] min-h-[184px]">
       <div class="w-full h-20 py-4 flex justify-center items-center border-b-2 border-b-gray-900">
         <h1 class="text-3xl font-bold">SELAMAT DATANG DI PEMBELAJARAN ONLINE</h1>
       </div>
       <div class="bg-sky-950 p-5">
         <nav class="w-full flex justify-between items-center">
-          <button id="back-button"
+          <button v-on:click="back"
             class="text-white flex flex-row bg-blue-700 items-center hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
               width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -122,67 +131,62 @@ $fullUrl = "$protocol://$host$uri";
         </nav>
       </div>
     </header>
-    <main class="container mx-auto">
-      <div class="max-w-[90%] mx-auto mt-16 bg-slate-900 py-5 px-6 rounded-xl" id="quizForm">
-        <h1 class="text-2xl font-extrabold text-white text-center my-8">Tambahkan Quiz Baru</h1>
-        <div class="relative z-0 w-full mb-5 group">
-          <label for="title" class="text-white">Judul Quiz</label>
-          <input type="text" id="title" name="title" class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1"
-            v-model="title">
-        </div>
-        <div v-for="data in dataQuiz" :key="data.order_number">
-          <h3 class="text-white font-bold text-4xl">Quiz {{data.order_number}}</h3>
-          <div class="relative z-0 w-full mb-5 group">
-            <label :for="`question-${data.id}`" class="text-white">Pertanyaan Quiz</label>
-            <textarea :id="`question-${data.id}`" :name="`question-${data.id}`"
-              class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1" v-model="data.question"></textarea>
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <label :for="`option1-${data.id}`" class="text-white">Option 1</label>
-            <input type="text" :id="`option1-${data.id}`" :name="`option1-${data.id}`"
-              class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1" v-model="data.option1">
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <label :for="`option2-${data.id}`" class="text-white">Option 2</label>
-            <input type="text" :id="`option2-${data.id}`" :name="`option2-${data.id}`"
-              class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1" v-model="data.option2">
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <label :for="`option3-${data.id}`" class="text-white">Option 3</label>
-            <input type="text" :id="`option3-${data.id}`" :name="`option3-${data.id}`"
-              class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1" v-model="data.option3">
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <label :for="`option4-${data.id}`" class="text-white">Option 4</label>
-            <input type="text" :id="`option4-${data.id}`" :name="`option4-${data.id}`"
-              class="w-full bg-white text-slate-800 p-3 rounded-lg mt-1" v-model="data.option4">
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-            <label :for="`answer-${data.id}`" class="text-white">Jawaban</label>
-            <select :id="`answer-${data.id}`" :name="`answer-${data.id}`"
-              class="w-full bg-white p-3 rounded-lg mt-1 text-slate-800" v-model="data.answer">
-              <option value="" disabled selected>Pilih Jawaban</option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-              <option value="option4">Option 4</option>
-            </select>
-          </div>
-          <div>
-            <button type="button"
-              class="w-full bg-red-500 text-white p-3 rounded-lg mt-1 hover:bg-red-600 focus:outline-none mb-12"
-              v-on:click="removeQuiz(data.id)">Hapus Quiz</button>
-          </div>
-        </div>
+    <main class="container mx-auto h-[77vh] min-h-[400px]">
+      <div class="w-full pt-4">
+        <h2 class="text-center text-4xl font-extrabold">{{title}}</h2>
+      </div>
+      <div class="w-full flex flex-row mt-4">
+        <div class="w-[80%]">
+          <div v-for="data in dataQuiz" :key="data.order_number">
+            <div v-if="data.show.order_number == String(currentState)" v-html="data.show.question"
+              class="text-3xl mt-3 mb-3">
+            </div>
+            <div v-if="data.show.order_number == String(currentState)">
+              <div class="flex flex-row items-center">
+                <input type="radio" :id="`option1-${data.show.order_number}`" name="option" v-model="data.show.choose"
+                  :value="data.show.pilihan1" class="w-[25px] h-[25px] mr-3">
+                <label class="text-2xl" :for="`option1-${data.show.order_number}`">{{ data.option1 }}</label>
+              </div>
+              <div class="flex flex-row items-center mt-2">
+                <input type="radio" :id="`option2-${data.show.order_number}`" name="option" v-model="data.show.choose"
+                  :value="data.show.pilihan2" class="w-[25px] h-[25px] mr-3">
+                <labe class="text-2xl" l :for="`option2-${data.show.order_number}`">{{ data.option2 }}</label>
+              </div>
+              <div class="flex flex-row items-center mt-2">
+                <input type="radio" :id="`option3-${data.show.order_number}`" name="option" v-model="data.show.choose"
+                  :value="data.show.pilihan3" class="w-[25px] h-[25px] mr-3">
+                <label class="text-2xl" :for="`option3-${data.show.order_number}`">{{ data.option3 }}</label>
+              </div>
+              <div class="flex flex-row items-center mt-2">
+                <input type="radio" :id="`option4-${data.show.order_number}`" name="option" v-model="data.show.choose"
+                  :value="data.show.pilihan4" class="w-[25px] h-[25px] mr-3">
+                <label class="text-2xl" :for="`option4-${data.show.order_number}`">{{ data.option4 }}</label>
+              </div>
 
-        <button type="button"
-          class="w-full bg-indigo-500 text-white p-3 rounded-lg mt-1 hover:bg-indigo-600 focus:outline-none"
-          v-on:click="addQuiz">Tambahkan
-          Quiz</button>
-        <button type="button"
-          class="w-full bg-green-500 text-white p-3 rounded-lg mt-1 hover:bg-green-600 focus:outline-none"
-          v-on:click="saveQuiz">Save
-          Quiz</button>
+            </div>
+          </div>
+          <div class="flex flex-row gap-4 w-full justify-center mt-5">
+            <button v-if="currentState != 1" v-on:click="changeState(currentState-1)"
+              class="bg-slate-400 rounded-lg p-5 text-white font-bold mt-5">Sebelumnya</button>
+            <button v-if="dataQuiz.length != currentState" v-on:click="changeState(currentState+1)"
+              class="bg-slate-400 rounded-lg p-5 text-white font-bold mt-5">Selanjutnya</button>
+            <button v-else v-on:click="saveQuiz"
+              class="bg-pink-300 rounded-lg p-5 text-white font-bold mt-5">Submit</button>
+
+          </div>
+        </div>
+        <div class="w-[20%] border-l-4 border-slate-500-500 pl-2">
+          <h2 class="text-2xl font-bold text-center mb-2">Pilih Quiz</h2>
+          <div class="flex flex-row flex-wrap gap-3">
+            <div v-for="data in dataQuiz">
+              <button v-on:click="changeState(parseInt(data.order_number, 10))"
+                class="rounded-lg p-5 text-white font-bold" :class="{'bg-blue-600':currentState == parseInt(data.order_number, 10),
+              'bg-gray-500':currentState != parseInt(data.order_number, 10)}">
+                {{data.order_number}}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <div class="h-6"></div>
@@ -237,56 +241,92 @@ $fullUrl = "$protocol://$host$uri";
     createApp({
       setup() {
         const dataQuiz = reactive([]);
-        const dataId = ref(0);
+        const dataId = ref('');
         const title = ref('');
-        const modelQuiz = {
-          question: '',
-          option1: '',
-          option2: '',
-          option3: '',
-          option4: '',
-          answer: '',
-        }
-
+        const currentState = ref(1);
         const questionId = ref(1);
+        const sendData = reactive([]);
+        const score = ref(0);
+        const isScore = ref(false);
 
-        const addQuiz = () => {
-          const newQuestion = {
-            order_number: questionId.value,
-            ...modelQuiz,
+        async function getScore() {
+          const datas = {
+            user_id: '<?= $id ?>',
+            quiz_id: dataId.value,
           };
-          dataQuiz.push(newQuestion);
-          questionId.value++;
-          console.log(toRaw(dataQuiz));
-        };
-
-        function getQuizById() {
-          const path = window.location.pathname;
-          const segments = path.split('/');
-          const id = segments[2];
-          fetch(`/api/quiz/${id}`)
+          fetch(`/api/score`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datas),
+          })
             .then((response) => response.json())
             .then((data) => {
               if (data.status === 'success') {
-                console.log(data);
-                title.value = data.data.title;
-                dataId.value = data.data.id;
-                questionId.value = data.data.questions.length + 1;
-                data.data.questions.forEach((quiz) => {
-                  dataQuiz.push(quiz);
-                });
-              } else {
-                showAlert();
+                score.value = data.data.score;
+                isScore.value = true;
               }
             })
             .catch((error) => {
               console.error('Error:', error);
-              showAlert();
             });
         }
 
-        onMounted(() => {
-          getQuizById();
+        async function getQuizById() {
+          const path = window.location.pathname;
+          const segments = path.split('/');
+          const id = segments[2];
+
+          try {
+            const response = await fetch(`/api/quiz/${id}`);
+            const data = await response.json();
+
+            if (data.status === 'success') {
+              title.value = data.data.title;
+              dataId.value = data.data.id; // pastikan dataId.value diisi di sini
+              questionId.value = data.data.questions.length + 1;
+
+              dataQuiz.splice(0, dataQuiz.length); // reset dataQuiz sebelum memasukkan data baru
+
+              data.data.questions.forEach((quiz) => {
+                dataQuiz.push({
+                  ...quiz,
+                  show: {
+                    question: quiz.question,
+                    option1: quiz.option1,
+                    option2: quiz.option2,
+                    option3: quiz.option3,
+                    option4: quiz.option4,
+                    pilihan1: 'option1',
+                    pilihan2: 'option2',
+                    pilihan3: 'option3',
+                    pilihan4: 'option4',
+                    choose: '',
+                    order_number: quiz.order_number,
+                  },
+                });
+              });
+
+              console.log('Quiz data:', data);
+            } else {
+              showAlert();
+              setTimeout(() => {
+                window.location.href = '/';
+              }, 3000);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            showAlert();
+            setTimeout(function () {
+              window.location.href = '/';
+            }, 3000);
+          }
+        }
+
+        onMounted(async () => {
+          await getQuizById(); // Tunggu getQuizById selesai
+          await getScore();    // Lalu panggil getScore setelah dataId.value terisi
         });
         function showAlert() {
           const alertElement = document.getElementById('alertError');
@@ -296,34 +336,11 @@ $fullUrl = "$protocol://$host$uri";
           }, 3000);
         }
 
-        function removeQuiz(id) {
-          if (confirm('Apakah Anda yakin ingin menghapus quiz ini?')) {
-            const index = dataQuiz.findIndex((quiz) => quiz.id === id);
-
-            if (index !== -1) {
-              dataQuiz.splice(index, 1);
-            }
-
-            dataQuiz.forEach((quiz, idx) => {
-              quiz.id = idx + 1;
-              if (idx === dataQuiz.length - 1) {
-                questionId.value = idx + 2;
-              }
-            });
-          }
-
-        }
-
         function checkData() {
-          if (title.value === '') {
-            alert('Judul Quiz tidak boleh kosong');
-            return false;
-          }
-
           for (let i = 0; i < dataQuiz.length; i++) {
-            const quiz = dataQuiz[i];
-            if (quiz.question === '' || quiz.option1 === '' || quiz.option2 === '' || quiz.option3 === '' || quiz.option4 === '' || quiz.answer === '') {
-              alert('Data Quiz tidak boleh kosong');
+            const quiz = dataQuiz[i].show;
+            if (quiz.choose === '') {
+              alert('Kamu Belum Menyelesaikan Quiz!');
               return false;
             }
           }
@@ -333,25 +350,29 @@ $fullUrl = "$protocol://$host$uri";
 
         async function saveQuiz() {
           if (checkData()) {
-            fetch('/api/quiz/update'+dataId, {
+            let stateScore = 0;
+            dataQuiz.forEach(data => {
+              if (data.show.choose === data.answer) {
+                stateScore += 1;
+              }
+            });
+            score.value = Math.round((stateScore / dataQuiz.length) * 100);
+
+            fetch(`/api/score/add`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify(
-                {
-                  title: title.value,
-                  id: questionId.value,
-                  data: toRaw(dataQuiz),
-                }
-              ),
+              body: JSON.stringify({
+                user_id: '<?= $id ?>',
+                quiz_id: dataId.value,
+                score: score.value
+              })
             })
               .then((response) => response.json())
               .then((data) => {
                 if (data.status === 'success') {
-                  dataQuiz.splice(0, dataQuiz.length);
-                  addQuiz();
-                  alert('Quiz berhasil ditambahkan');
+                  isScore.value = true;
                 } else {
                   showAlert();
                 }
@@ -360,16 +381,59 @@ $fullUrl = "$protocol://$host$uri";
                 console.error('Error:', error);
                 showAlert();
               });
+            sendData.splice(0, sendData.length);
+            dataQuiz.forEach(data => {
+              sendData.push({
+                ...data.answer
+              });
+            });
+            // fetch('/api/quiz/update/' + dataId.value, {
+            //   method: 'POST',
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //   },
+            //   body: JSON.stringify(
+            //     {
+            //       title: title.value,
+            //       id: questionId.value,
+            //       data: toRaw(sendData),
+            //     }
+            //   ),
+            // })
+            //   .then((response) => response.json())
+            //   .then((data) => {
+            //     if (data.status === 'success') {
+            //       alert('Data Quiz Berhasil Ditambahkan!');
+            //     } else {
+            //       showAlert();
+            //     }
+            //   })
+            //     .catch((error) => {
+            //       console.error('Error:', error);
+            //       showAlert();
+            //     });
           }
+        }
+
+        function changeState(state) {
+          currentState.value = state;
+        }
+
+        function back() {
+          window.location.href = '/';
         }
 
 
         return {
           dataQuiz,
-          addQuiz,
-          removeQuiz,
           saveQuiz,
-          title
+          title,
+          dataId,
+          currentState,
+          changeState,
+          score,
+          isScore,
+          back
         }
       }
     }).mount('#app')

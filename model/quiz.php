@@ -67,7 +67,7 @@ class Quiz
         }
     }
 
-    
+
 
     public function addQuiz(string $title): int|null
     {
@@ -110,52 +110,52 @@ class Quiz
         try {
             $sql = "UPDATE quiz SET title = ? WHERE id = ?";
             $stmt = $this->con->prepare($sql);
-    
+
             $stmt->bindParam(1, $title, SQLITE3_TEXT);
             $stmt->bindParam(2, $id, SQLITE3_INTEGER);
-    
+
             if (!$stmt->execute()) {
                 $this->logger->error("Error executing update query");
                 return false;
             }
-    
+
             return true;
         } catch (\Throwable $th) {
             $this->logger->error($th->getMessage());
             return false;
         }
     }
-    
+
 
     public function updateQuestion(int $id, int $order_number, string $question, string $option1, string $option2, string $option3, string $option4, string $answer)
-{
-    try {
-        // Mengubah query dari INSERT menjadi UPDATE
-        $sql = "UPDATE question SET order_number = ?, question = ?, option1 = ?, option2 = ?, option3 = ?, option4 = ?, answer = ? WHERE id = ?";
-        $stmt = $this->con->prepare($sql);
-        
-        // Menyusun parameter untuk di-bind
-        $stmt->bindParam(1, $order_number, SQLITE3_INTEGER);
-        $stmt->bindParam(2, $question, SQLITE3_TEXT);
-        $stmt->bindParam(3, $option1, SQLITE3_TEXT);
-        $stmt->bindParam(4, $option2, SQLITE3_TEXT);
-        $stmt->bindParam(5, $option3, SQLITE3_TEXT);
-        $stmt->bindParam(6, $option4, SQLITE3_TEXT);
-        $stmt->bindParam(7, $answer, SQLITE3_TEXT);
-        $stmt->bindParam(8, $id, SQLITE3_INTEGER); // Bind ID untuk kondisi WHERE
+    {
+        try {
+            // Mengubah query dari INSERT menjadi UPDATE
+            $sql = "UPDATE question SET order_number = ?, question = ?, option1 = ?, option2 = ?, option3 = ?, option4 = ?, answer = ? WHERE id = ?";
+            $stmt = $this->con->prepare($sql);
 
-        // Menjalankan query update
-        if (!$stmt->execute()) {
-            $this->logger->error("Error executing update query: " );
+            // Menyusun parameter untuk di-bind
+            $stmt->bindParam(1, $order_number, SQLITE3_INTEGER);
+            $stmt->bindParam(2, $question, SQLITE3_TEXT);
+            $stmt->bindParam(3, $option1, SQLITE3_TEXT);
+            $stmt->bindParam(4, $option2, SQLITE3_TEXT);
+            $stmt->bindParam(5, $option3, SQLITE3_TEXT);
+            $stmt->bindParam(6, $option4, SQLITE3_TEXT);
+            $stmt->bindParam(7, $answer, SQLITE3_TEXT);
+            $stmt->bindParam(8, $id, SQLITE3_INTEGER); // Bind ID untuk kondisi WHERE
+
+            // Menjalankan query update
+            if (!$stmt->execute()) {
+                $this->logger->error("Error executing update query: ");
+                return false;
+            }
+
+            return true;
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
             return false;
         }
-
-        return true;
-    } catch (\Throwable $th) {
-        $this->logger->error($th->getMessage());
-        return false;
     }
-}
 
     public function deleteQuiz(int $id)
     {
@@ -170,4 +170,99 @@ class Quiz
             return false;
         }
     }
+
+    public function deleteQuestion(int $id)
+    {
+        try {
+            $sql = "DELETE FROM question WHERE id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(1, $id, SQLITE3_INTEGER);
+            $stmt->execute();
+            return true;
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return false;
+        }
+    }
+
+    public function addScore(string $idUser, int $idQuiz, int $score): bool
+    {
+        try {
+            $this->logger->warning("Adding score for user $idUser on quiz $idQuiz with scre $score");
+            $sql = "INSERT INTO score (user_id, quiz_id, score) VALUES (?, ?, ?)";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(1, $idUser, SQLITE3_TEXT);
+            $stmt->bindParam(2, $idQuiz, SQLITE3_INTEGER);
+            $stmt->bindParam(3, $score, SQLITE3_INTEGER);
+            $stmt->execute();
+            return true;
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return false;
+        }
+
+    }
+
+    public function getScoreDetail(string $idUser, int $idQuiz): array|null
+    {
+        try {
+            $sql = "SELECT score FROM score WHERE user_id = ? AND quiz_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(1, $idUser, SQLITE3_TEXT);
+            $stmt->bindParam(2, $idQuiz, SQLITE3_INTEGER);
+            $result = $stmt->execute();
+            $score = $result->fetchArray(SQLITE3_ASSOC);
+            return $score ?: null;
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return null;
+        }
+    }
+
+    public function getScoreUser(string $id)
+    {
+        try {
+            $sql = "SELECT * FROM score WHERE user_id = ?";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(1, $id, SQLITE3_TEXT);
+            $result = $stmt->execute();
+            $scores = [];
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                $scores[] = $row;
+            }
+            return $scores;
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return null;
+        }
+    }
+
+    public function getQuizScore(int $id): array|null
+    {
+        try {
+            // Query dengan JOIN untuk menggabungkan data dari tabel score dan users
+            $sql = "
+                SELECT score.*, users.display_name 
+                FROM score
+                JOIN users ON score.user_id = users.id
+                WHERE score.quiz_id = ?
+            ";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(1, $id, SQLITE3_INTEGER);
+            $result = $stmt->execute();
+
+            $scores = [];
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                $scores[] = $row;
+            }
+
+            return $scores;
+        } catch (\Throwable $th) {
+            $this->logger->error($th->getMessage());
+            return null;
+        }
+    }
+
+
 }

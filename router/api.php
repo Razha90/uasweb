@@ -30,9 +30,18 @@ $router->map('GET', '/api/message/[:receiver_id]/[:sender_id]', [$messageControl
 $router->map('POST', '/api/quiz', [$quizController, 'addQuiz']);
 $router->map('GET', '/api/quiz/[:id]', [$quizController, 'getQuizById']);
 $router->map('POST', '/api/quiz/update/[:id]', [$quizController, 'updateQuiz']);
+$router->map('POST', '/api/quiz/delete/[:id]', [$quizController, 'deleteQuiz']);
+$router->map('POST', '/api/score/add', [$quizController, 'addScore']);
+$router->map('GET', '/api/score/[:id]', [$quizController, 'getScore']);
+$router->map('POST', '/api/score', [$quizController, 'getScoreDetail']);
+$router->map('GET', '/api/quiz/score/[:id]', [$quizController, 'getAllQuizScore']);
 
 
 
+
+
+
+$router->map('POST', '/api/question/del/[:id]', [$quizController, 'deleteQuestion'] );
 
 
 

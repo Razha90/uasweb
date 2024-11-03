@@ -67,10 +67,7 @@ $fullUrl = "$protocol://$host$uri";
       class="alert p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
       <span class="font-medium">Gagal!</span> Data Pembelajaran Gagal Didapatkan.
     </div>
-    <header class="w-full h-[20vh]">
-      <div class="w-full h-20 py-4 flex justify-center items-center border-b-2 border-b-gray-900">
-        <h1 class="text-3xl font-bold">SELAMAT DATANG DI PEMBELAJARAN ONLINE</h1>
-      </div>
+    <header class="w-full h-[10vh]">
       <div class="w-full flex justify-between items-center bg-sky-950 p-3">
         <div>
           <button @click="backButton()"
